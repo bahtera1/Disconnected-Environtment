@@ -42,11 +42,11 @@
             this.btnOpen = new System.Windows.Forms.Button();
             this.txtNIM = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.prodiTI1DataSet = new Disconnected_Environtment.ProdiTI1DataSet();
             this.prodiTI1DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.prodiTI1DataSet = new Disconnected_Environtment.ProdiTI1DataSet();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -92,6 +92,7 @@
             this.cbxNama.Name = "cbxNama";
             this.cbxNama.Size = new System.Drawing.Size(121, 24);
             this.cbxNama.TabIndex = 5;
+            this.cbxNama.SelectedIndexChanged += new System.EventHandler(this.cbxNama_SelectedIndexChanged_1);
             // 
             // cbxStatusMahasiswa
             // 
@@ -108,6 +109,7 @@
             this.cbxTahunMasuk.Name = "cbxTahunMasuk";
             this.cbxTahunMasuk.Size = new System.Drawing.Size(121, 24);
             this.cbxTahunMasuk.TabIndex = 7;
+            this.cbxTahunMasuk.SelectedIndexChanged += new System.EventHandler(this.cbxTahunMasuk_SelectedIndexChanged);
             // 
             // btnAdd
             // 
@@ -167,16 +169,17 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(390, 150);
             this.dataGridView1.TabIndex = 13;
-            // 
-            // prodiTI1DataSet
-            // 
-            this.prodiTI1DataSet.DataSetName = "ProdiTI1DataSet";
-            this.prodiTI1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // prodiTI1DataSetBindingSource
             // 
             this.prodiTI1DataSetBindingSource.DataSource = this.prodiTI1DataSet;
             this.prodiTI1DataSetBindingSource.Position = 0;
+            // 
+            // prodiTI1DataSet
+            // 
+            this.prodiTI1DataSet.DataSetName = "ProdiTI1DataSet";
+            this.prodiTI1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // FormDataStatusMahasiswa
             // 
@@ -200,8 +203,8 @@
             this.Text = "FormDataStatusMahasiswa";
             this.Load += new System.EventHandler(this.FormDataStatusMahasiswa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

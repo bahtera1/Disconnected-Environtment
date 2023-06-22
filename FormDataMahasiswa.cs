@@ -14,18 +14,18 @@ namespace Disconnected_Environtment
     public partial class FormDataMahasiswa : Form
     {
 
-        private string stringconnection = "data source=LAPTOP-NAUFALAS\\NAUFALAS;" + "database=ProdiTI1;user ID=sa;password=bahtera1234";
+        private string stringconnection = "data source=LAPTOP-NAUFALAS\\NAUFALAS;" + "database=ProdiTI1;user ID=sa;password=123";
         private SqlConnection koneksi;
         private string nim, nama, alamat, jk, prodi;
         private DateTime tgl;
-        BindingSource customersBindingSource = new BindingSource();
+        private BindingSource customerBindingSource;
 
 
         public FormDataMahasiswa()
         {
             InitializeComponent();
             koneksi = new SqlConnection(stringconnection);
-            this.bnMahasiswa.BindingSource = this.customersBindingSource;
+            customerBindingSource = new BindingSource();
             refreshform();
         }
 
@@ -56,7 +56,6 @@ namespace Disconnected_Environtment
             prodi = cbxProdi.Text;
             int hs = 0;
             koneksi.Open();
-
             string strs = "select id_prodi from dbo.Prodi where nama_prodi = @dd";
             SqlCommand cm = new SqlCommand(strs, koneksi);
             cm.CommandType = CommandType.Text;
@@ -66,58 +65,48 @@ namespace Disconnected_Environtment
             {
                 hs = int.Parse(dr["id_prodi"].ToString());
             }
+
             dr.Close();
-            string str = "insert into dbo.Mahasiswa (nim, nama_mahasiswa, jenis_kelamin, alamat, tgl_lahir, id_prodi)" + "values(@NIM, @Nm," +
-                "@Jk, @Al, @Tgll, @Idp)";
+            string str = "insert into dbo.mahasiswa (nim, nama_mahasiswa, jenis_kel, alamat, tgl_lahir, id_prodi)" +
+                "values(@NIM, @Nm, @Jk, @Al, @Tgl, @Idp)";
             SqlCommand cmd = new SqlCommand(str, koneksi);
             cmd.CommandType = CommandType.Text;
-
             cmd.Parameters.Add(new SqlParameter("NIM", nim));
             cmd.Parameters.Add(new SqlParameter("Nm", nama));
             cmd.Parameters.Add(new SqlParameter("Jk", jk));
             cmd.Parameters.Add(new SqlParameter("Al", alamat));
-            cmd.Parameters.Add(new SqlParameter("Tgll", tgl));
+            cmd.Parameters.Add(new SqlParameter("Tgl", tgl));
             cmd.Parameters.Add(new SqlParameter("Idp", hs));
             cmd.ExecuteNonQuery();
-
             koneksi.Close();
-
-            MessageBox.Show("Data Berhasil Disimpan", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            MessageBox.Show("Data Berhasill Disimpan", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
             refreshform();
+
 
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            FormHalamanUtama fm = new FormHalamanUtama();
-            fm.Show();
-            this.Hide();
+            refreshform();
         }
 
-        private void FormDataMahasiswa_Load(object sender, EventArgs e)
+        private void txtNIM_TextChanged(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'prodiTI1DataSet.mahasiswa' table. You can move, or remove it, as needed.
+
+        }
+
+        private void FormDataMahasiswa_Load()
+        {
             this.mahasiswaTableAdapter.Fill(this.prodiTI1DataSet.mahasiswa);
             koneksi.Open();
-            SqlDataAdapter dataAdapter1 = new SqlDataAdapter(new SqlCommand("Select n.nim,n.nama_mahasiswa,"
-                + "m.alamat, m.jenis_kelamin, m.tgl_lahir, p.nama_prodi from dbo.Mahasiswa m" +
-                "join dbo.Prodi p on m.id_prodi = p.id_prodi", koneksi));
-            DataSet ds = new DataSet();
-            dataAdapter1.Fill(ds);
+            string query = "SELECT nim, nama_mahasiswa, jenis_kel, alamat, tgl_lahir, id_prodi FROM mahasiswa";
+            SqlDataAdapter adapter = new SqlDataAdapter(query, koneksi);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+            customerBindingSource.DataSource = dataTable;
 
-            this.customersBindingSource.DataSource = ds.Tables[0];
-            this.txtNIM.DataBindings.Add(
-                new Binding("Text", this.customersBindingSource, "NIM", true));
-            this.txtNama.DataBindings.Add(
-                new Binding("Text", this.customersBindingSource, "nama_mahasiswa", true));
-            this.txtAlamat.DataBindings.Add(
-                new Binding("Text", this.customersBindingSource, "alamat", true));
-            this.cbxJenisKelamin.DataBindings.Add(new Binding("Text", this.customersBindingSource,
-                "jenis_kelamin", true));
-            this.dtTanggalLahir.DataBindings.Add(new Binding("Text", this.customersBindingSource, "jenis_kelamin", true));
-            this.cbxProdi.DataBindings.Add(new Binding("Text", this.customersBindingSource, "nama_prodi", true));
             koneksi.Close();
+
         }
 
         private void clearBinding()
@@ -142,6 +131,7 @@ namespace Disconnected_Environtment
             btnSave.Enabled = false;
             btnClear.Enabled = false;
             clearBinding();
+            FormDataMahasiswa_Load();
         }
 
         private void Prodicbx()
@@ -149,7 +139,7 @@ namespace Disconnected_Environtment
             koneksi.Open();
             string str = "select nama_prodi from dbo.Prodi";
             SqlCommand cmd = new SqlCommand(str, koneksi);
-            SqlDataAdapter da = new SqlDataAdapter(str,koneksi);
+            SqlDataAdapter da = new SqlDataAdapter(str, koneksi);
             DataSet ds = new DataSet();
             da.Fill(ds);
             cmd.ExecuteReader();
@@ -157,6 +147,12 @@ namespace Disconnected_Environtment
             cbxProdi.DisplayMember = "nama_prodi";
             cbxProdi.ValueMember = "id_prodi";
             cbxProdi.DataSource = ds.Tables[0];
+        }
+        private void FormDataMahasiswa_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FormHalamanUtama fm = new FormHalamanUtama();
+            fm.Show();
+            this.Hide();
         }
     }
 }

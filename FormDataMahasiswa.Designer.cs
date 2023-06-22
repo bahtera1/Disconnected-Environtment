@@ -37,6 +37,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtNIM = new System.Windows.Forms.TextBox();
+            this.mahasiswaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.prodiTI1DataSet = new Disconnected_Environtment.ProdiTI1DataSet();
             this.txtNama = new System.Windows.Forms.TextBox();
             this.txtAlamat = new System.Windows.Forms.TextBox();
             this.cbxJenisKelamin = new System.Windows.Forms.ComboBox();
@@ -58,13 +60,11 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.prodiTI1DataSet = new Disconnected_Environtment.ProdiTI1DataSet();
-            this.mahasiswaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.mahasiswaTableAdapter = new Disconnected_Environtment.ProdiTI1DataSetTableAdapters.mahasiswaTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.mahasiswaBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bnMahasiswa)).BeginInit();
             this.bnMahasiswa.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mahasiswaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -129,6 +129,17 @@
             this.txtNIM.Name = "txtNIM";
             this.txtNIM.Size = new System.Drawing.Size(100, 22);
             this.txtNIM.TabIndex = 6;
+            this.txtNIM.TextChanged += new System.EventHandler(this.txtNIM_TextChanged);
+            // 
+            // mahasiswaBindingSource
+            // 
+            this.mahasiswaBindingSource.DataMember = "mahasiswa";
+            this.mahasiswaBindingSource.DataSource = this.prodiTI1DataSet;
+            // 
+            // prodiTI1DataSet
+            // 
+            this.prodiTI1DataSet.DataSetName = "ProdiTI1DataSet";
+            this.prodiTI1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // txtNama
             // 
@@ -332,16 +343,6 @@
             this.toolStripButton1.Size = new System.Drawing.Size(29, 24);
             this.toolStripButton1.Text = "toolStripButton1";
             // 
-            // prodiTI1DataSet
-            // 
-            this.prodiTI1DataSet.DataSetName = "ProdiTI1DataSet";
-            this.prodiTI1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // mahasiswaBindingSource
-            // 
-            this.mahasiswaBindingSource.DataMember = "mahasiswa";
-            this.mahasiswaBindingSource.DataSource = this.prodiTI1DataSet;
-            // 
             // mahasiswaTableAdapter
             // 
             this.mahasiswaTableAdapter.ClearBeforeFill = true;
@@ -369,12 +370,11 @@
             this.Controls.Add(this.label1);
             this.Name = "FormDataMahasiswa";
             this.Text = "FormDataMahasiswa";
-            this.Load += new System.EventHandler(this.FormDataMahasiswa_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.mahasiswaBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bnMahasiswa)).EndInit();
             this.bnMahasiswa.ResumeLayout(false);
             this.bnMahasiswa.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mahasiswaBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

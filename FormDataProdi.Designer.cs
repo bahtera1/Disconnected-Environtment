@@ -39,6 +39,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.prodiTI1DataSet1 = new Disconnected_Environtment.ProdiTI1DataSet();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.nn = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.prodiTI1DataSet1)).BeginInit();
@@ -111,6 +113,7 @@
             this.label1.Size = new System.Drawing.Size(79, 16);
             this.label1.TabIndex = 6;
             this.label1.Text = "Nama Prodi";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // prodiTI1DataSet1
             // 
@@ -127,11 +130,30 @@
             this.dataGridView1.Size = new System.Drawing.Size(240, 150);
             this.dataGridView1.TabIndex = 7;
             // 
+            // nn
+            // 
+            this.nn.Location = new System.Drawing.Point(182, 271);
+            this.nn.Name = "nn";
+            this.nn.Size = new System.Drawing.Size(100, 22);
+            this.nn.TabIndex = 8;
+            this.nn.TextChanged += new System.EventHandler(this.nn_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(92, 271);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 16);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "ID Prodi";
+            // 
             // FormDataProdi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.nn);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nmp);
@@ -162,5 +184,7 @@
         private ProdiTI1DataSet prodiTI1DataSet;
         private ProdiTI1DataSet prodiTI1DataSet1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TextBox nn;
+        private System.Windows.Forms.Label label2;
     }
 }
